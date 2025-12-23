@@ -65,7 +65,7 @@ Just like my skills… and my placement story.
 ## 🤝 Connect With Me
 
 - GitHub: https://github.com/alokcasm
-- Instagram: @digitalbiharboard_dbb  
+- Instagram: alokxtic 
 - Website: alokcodes.com
 
 ---
