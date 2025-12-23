@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlokCodes</title>
+    
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONTS -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="/assets/style/styles.css" rel="stylesheet">
+</head>
+<body class="loading">
+
+    <!-- CURSOR -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+
+    <!-- PROJECT PREVIEW IMG CONTAINER -->
+    <img src="" alt="Project Preview" class="project-preview" id="preview-img">
+
+    <!-- LOADER -->
+    <div id="loader" class="fixed inset-0 bg-black z-[100] flex flex-col justify-between p-6 md:p-12">
+        <div class="flex justify-between font-mono text-[10px] md:text-xs uppercase opacity-50">
+            <span>System: Booting</span>
+            <span>AlokCodes</span>
+        </div>
+        
+        <div class="absolute inset-0 flex items-center justify-center">
+             <div class="w-20 h-20 border border-white/20 animate-spin" style="animation-duration: 3s;"></div>
+        </div>
+
+        <div class="w-full">
+            <div class="text-[12vw] leading-none font-bold tracking-tighter" id="loader-count">000</div>
+            <div class="w-full h-[1px] bg-white/20 relative overflow-hidden mt-2">
+                <div id="loader-bar" class="absolute inset-0 bg-white origin-left scale-x-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="w-full relative z-10 opacity-0" id="main-content">
+
+        <!-- 1. HERO SECTION -->
+        <section class="min-h-screen w-full flex flex-col justify-center px-6 md:px-20 relative pt-24 md:pt-0">
+            <!-- Background Code texture -->
+            <div class="absolute top-10 right-10 font-mono text-[10px] text-white/20 text-right hidden md:block select-none">
+                class Developer extends Person {<br>
+                &nbsp;&nbsp;constructor() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;this.name = "Alok Kumar";<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;this.stack = ["GSAP", "React"];<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+
+            <div class="mb-4 overflow-hidden">
+                <p class="font-mono text-xs md:text-sm text-gray-400 uppercase tracking-widest reveal-text">
+                    Student AT Dr. Harisingh Gour University
+                </p>
+            </div>
+
+            <h1 class="text-[14vw] md:text-[11vw] leading-[0.85] font-semibold uppercase tracking-tighter mix-blend-difference z-20">
+                <div class="clip-text"><span class="reveal-char">Alok</span></div>
+                <div class="clip-text"><span class="reveal-char text-gray-600">Kumar</span></div>
+            </h1>
+
+            <div class="mt-12 md:mt-16 flex flex-col md:flex-row justify-between items-start md:items-end w-full">
+                <div class="max-w-md text-lg md:text-xl font-light leading-relaxed opacity-0 fade-in">
+                    BCA student jahan college bolta hai “placement milegi”,
+aur course bolta hai “khud dekh lo bhai.”
+Currently surviving with projects and YouTube tutorials.
+                </div>
+                
+                <div class="flex gap-8 md:gap-16 mt-10 md:mt-0 font-mono text-xs uppercase tracking-widest opacity-0 fade-in">
+                    <div>
+                        <div class="text-3xl md:text-4xl font-sans font-bold counter" data-target="1">0</div>
+                        <div class="text-gray-500 mt-2">Projects</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-sans font-bold counter" data-target="5">0</div>
+                        <div class="text-gray-500 mt-2">Lines of Code</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-6 animate-bounce opacity-50 text-xs font-mono">
+                ↓ SCROLL
+            </div>
+        </section>
+
+        <!-- 2. ABOUT & TIMELINE -->
+        <section class="relative w-full bg-[#050505] border-t border-white/10" id="about">
+            <div class="flex flex-col md:flex-row w-full">
+                
+                <!-- Left: Sticky Bio -->
+                <div class="w-full md:w-1/2 px-6 md:px-20 py-20 md:min-h-screen flex flex-col justify-center border-r border-white/5 relative">
+                    <div class="md:sticky md:top-20">
+                        <h2 class="text-xs font-bold font-mono uppercase tracking-[0.2em] text-gray-500 mb-8">01 / About Me</h2>
+                        <div class="text-2xl md:text-4xl leading-tight font-medium mb-10 reveal-text">
+                            "A Very Short Story<br>Of Me."
+                        </div>
+                        <p class="text-gray-400 leading-relaxed mb-8 max-w-sm">
+                            I’m in my 2nd year of BCA, turning coffee into code and errors into experience—still waiting for the day my code runs perfectly on the first try.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Scrolling Timeline -->
+                <div class="w-full md:w-1/2 px-6 md:px-20 py-20 bg-[#080808]">
+                    <div class="space-y-24">
+                        
+                        <div class="timeline-item opacity-20">
+                            <div class="font-mono text-xs text-green-500 mb-2">2024 – Present</div>
+                            <h3 class="text-2xl font-bold mb-4">BCA Student</h3>
+                            <p class="text-gray-400 text-sm">Dr. Harisingh Gour University Sagar MP.</p>
+                        </div>
+
+                        <div class="timeline-item opacity-20">
+                            <div class="font-mono text-xs text-green-500 mb-2">2023</div>
+                            <h3 class="text-2xl font-bold mb-4">Completed 12th</h3>
+                            <p class="text-gray-400 text-sm">Jawahar Navodaya Vidyalaya Supaul Bihar.</p>
+                        </div>
+
+                        <div class="timeline-item opacity-20">
+                            <div class="font-mono text-xs text-green-500 mb-2">2021</div>
+                            <h3 class="text-2xl font-bold mb-4">Completed Class 10th</h3>
+                            <p class="text-gray-400 text-sm">Jawahar Navodaya Vidyalaya Supaul Bihar.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SKILLS (Horizontal Scroll) -->
+        <section id="skills-wrapper" class="w-full relative bg-black overflow-hidden">
+            <div class="px-6 md:px-20 pt-20">
+                 <h2 class="text-xs font-bold font-mono uppercase tracking-[0.2em] text-gray-500">02 / Skills</h2>
+            </div>
+            
+            <div id="skills-pin" class="h-auto md:h-screen w-full flex items-center overflow-hidden">
+                <div id="skills-track" class="flex flex-col md:flex-row gap-10 md:gap-20 px-6 md:px-20 py-10 md:py-0 w-full md:w-auto">
+                    
+                    <!-- Card 1 -->
+                    <div class="skill-card min-w-full md:min-w-[400px] h-[300px] md:h-[400px] border border-white/20 bg-[#0a0a0a] p-8 flex flex-col justify-between group hover:bg-white/10 transition-colors">
+                        <div class="text-4xl font-bold text-gray-700 group-hover:text-white transition-colors">DEV</div>
+                        <ul class="font-mono text-sm space-y-2 text-gray-400">
+                            <li>HTML5 / CSS3</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li class="text-white">GSAP / ScrollTrigger</li>
+                            <li>Three.js Basics</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="skill-card min-w-full md:min-w-[400px] h-[300px] md:h-[400px] border border-white/20 bg-[#0a0a0a] p-8 flex flex-col justify-between group hover:bg-white/10 transition-colors">
+                        <div class="text-4xl font-bold text-gray-700 group-hover:text-white transition-colors">MOTION</div>
+                        <ul class="font-mono text-sm space-y-2 text-gray-400">
+                            <li>Micro-Interactions</li>
+                            <li>Physics Based Anim</li>
+                            <li>Scroll Storytelling</li>
+                            <li>WebGL Shaders</li>
+                        </ul>
+                    </div>
+
+                     <!-- Card 3 -->
+                    <div class="skill-card min-w-full md:min-w-[400px] h-[300px] md:h-[400px] border border-white/20 bg-[#0a0a0a] p-8 flex flex-col justify-between group hover:bg-white/10 transition-colors">
+                        <div class="text-4xl font-bold text-gray-700 group-hover:text-white transition-colors">TOOLS</div>
+                        <ul class="font-mono text-sm space-y-2 text-gray-400">
+                            <li>Git / Github</li>
+                            <li>Figma</li>
+                            <li>VS Code</li>
+                            <li>Chrome DevTools</li>
+                        </ul>
+                    </div>
+                    <div class="hidden md:block min-w-[100px]"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SELECTED WORKS -->
+        <section class="py-32 px-6 md:px-20 w-full bg-[#030303] relative z-20">
+            <h2 class="text-xs font-bold font-mono uppercase tracking-[0.2em] text-gray-500 mb-16">03 / Selected Works</h2>
+
+            <div class="works-list">
+                <!-- Project 1 -->
+                <div class="project-item border-t border-white/20 py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer group magnetic-area" 
+                     data-img="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop">
+                    <h3 class="text-3xl md:text-5xl font-bold uppercase group-hover:translate-x-4 transition-transform duration-500">SPOTIFY CLONE</h3>
+                    <div class="flex flex-col items-end mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <span class="font-mono text-xs">HTML CSS</span>
+                        <span class="text-sm">A pure spotify frontend</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-item border-t border-white/20 py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer group magnetic-area" 
+                     data-img="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=800&auto=format&fit=crop">
+                    <h3 class="text-3xl md:text-5xl font-bold uppercase group-hover:translate-x-4 transition-transform duration-500">Student System</h3>
+                    <div class="flex flex-col items-end mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <span class="font-mono text-xs">C++ • OOP</span>
+                        <span class="text-sm">Backend Management CLI</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-item border-t border-white/20 py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer group magnetic-area" 
+                     data-img="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=800&auto=format&fit=crop">
+                    <h3 class="text-3xl md:text-5xl font-bold uppercase group-hover:translate-x-4 transition-transform duration-500">Edu-Platform</h3>
+                    <div class="flex flex-col items-end mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <span class="font-mono text-xs">HTML • CSS Grid</span>
+                        <span class="text-sm">Responsive Blog Layout</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-item border-t border-b border-white/20 py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer group magnetic-area" 
+                     data-img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop">
+                    <h3 class="text-3xl md:text-5xl font-bold uppercase group-hover:translate-x-4 transition-transform duration-500">Scroll Lab</h3>
+                    <div class="flex flex-col items-end mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <span class="font-mono text-xs">WebGL • Experiments</span>
+                        <span class="text-sm">Interaction Playground</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SERVICES MARQUEE -->
+        <section class="py-24 bg-[#fff] overflow-hidden">
+            <div class="flex whitespace-nowrap text-[8vw] font-bold uppercase leading-none tracking-tight marquee-text opacity-30" style="color: #AA336A;">
+                <span class="mr-12">FRONTEND-DEVELOPER</span>
+                <span class="mr-12 stroke-text">GSAP Motion</span>
+                <span class="mr-12">UI Design</span>
+                <span class="mr-12 stroke-text">Coffee Addict</span>
+                <span class="mr-12">Bug Fixer</span>
+                <span class="mr-12 stroke-text">Pixel Pusher</span>
+            </div>
+        </section>
+
+        <!-- 6. NEW: SOCIALS & FORM (Enhanced GSAP) -->
+        <section class="py-32 px-6 md:px-20 w-full relative z-30 border-b border-white/10 bg-[#030303]" id="contact-zone">
+            
+            <h2 class="text-xs font-bold font-mono uppercase tracking-[0.2em] text-gray-500 mb-16">04 / Stalk & Talk</h2>
+
+            <div class="flex flex-col lg:flex-row gap-20">
+                
+                <!-- SOCIALS (Left Side) -->
+                <div class="w-full lg:w-1/2">
+                    <h3 class="text-3xl font-bold mb-8 text-white">Socials</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" id="social-grid">
+                        <!-- LinkedIn -->
+                        <a href="#" class="social-card block p-6 border border-white/20 bg-[#111] hover:bg-white hover:text-black hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden magnetic-area rounded-sm">
+                            <div class="font-mono text-xs mb-3 opacity-60 group-hover:opacity-100">Professional Me</div>
+                            <div class="text-xl font-bold">LinkedIn</div>
+                            <div class="text-[10px] mt-2 opacity-40 font-mono">I wear a tie here (virtually).</div>
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-lg">↗</div>
+                        </a>
+                        <!-- GitHub -->
+                        <a href="#" class="social-card block p-6 border border-white/20 bg-[#111] hover:bg-white hover:text-black hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden magnetic-area rounded-sm">
+                            <div class="font-mono text-xs mb-3 opacity-60 group-hover:opacity-100">Code Dump</div>
+                            <div class="text-xl font-bold">GitHub</div>
+                            <div class="text-[10px] mt-2 opacity-40 font-mono">Where bugs live rent-free.</div>
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-lg">↗</div>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="#" class="social-card block p-6 border border-white/20 bg-[#111] hover:bg-white hover:text-black hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden magnetic-area rounded-sm">
+                            <div class="font-mono text-xs mb-3 opacity-60 group-hover:opacity-100">Not Code</div>
+                            <div class="text-xl font-bold">Instagram</div>
+                            <div class="text-[10px] mt-2 opacity-40 font-mono">Just aesthetic photos of coffee.</div>
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-lg">↗</div>
+                        </a>
+                        <!-- Twitter/X -->
+                        <a href="#" class="social-card block p-6 border border-white/20 bg-[#111] hover:bg-white hover:text-black hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden magnetic-area rounded-sm">
+                            <div class="font-mono text-xs mb-3 opacity-60 group-hover:opacity-100">Rants</div>
+                            <div class="text-xl font-bold">Twitter / X</div>
+                            <div class="text-[10px] mt-2 opacity-40 font-mono">Complaining about CSS since 2021.</div>
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-lg">↗</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FORM (Right Side) -->
+                <div class="w-full lg:w-1/2 relative">
+                    <h3 class="text-3xl font-bold mb-8 text-white">Get In Touch</h3>
+                    <!-- Decorative comments -->
+                    <div class="font-mono text-[10px] text-gray-500 mb-6 select-none bg-white/5 p-4 rounded border-l-2 border-green-500">
+                        <span class="text-green-500">// TODO:</span> Implement AI response to pretend I'm busy.<br>
+                        <span class="text-blue-400">if</span> (msg == "bug report") <span class="text-yellow-300">ignore</span>();
+                    </div>
+
+                    <form id="chaos-form" class="space-y-8" onsubmit="event.preventDefault(); alert('Message sent to the void! (Just kidding, backend not connected yet)');">
+                        
+                        <div class="form-group overflow-hidden">
+                            <label class="font-mono text-xs text-gray-500 uppercase tracking-wider">Identity</label>
+                            <input type="text" class="terminal-input" placeholder="Batman? (or your real name)" required>
+                        </div>
+
+                        <div class="form-group overflow-hidden">
+                            <label class="font-mono text-xs text-gray-500 uppercase tracking-wider">Coordinates</label>
+                            <input type="email" class="terminal-input" placeholder="where@can-i-spam.you" required>
+                        </div>
+
+                        <div class="form-group overflow-hidden">
+                            <label class="font-mono text-xs text-gray-500 uppercase tracking-wider">Payload</label>
+                            <textarea rows="3" class="terminal-input resize-none" placeholder="Tell me a joke or offer me a job. Preferably the latter." required></textarea>
+                        </div>
+
+                        <button type="submit" class="group relative px-8 py-4 bg-white text-black font-bold text-sm uppercase tracking-wider overflow-hidden magnetic-area border border-white">
+                            <span class="relative z-10 group-hover:text-white transition-colors duration-300">Transmit Message</span>
+                            <div class="absolute inset-0 bg-gray-900 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"></div>
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. FOOTER -->
+        <section class="min-h-screen w-full flex flex-col justify-center items-center relative px-6 text-center z-20">
+            <p class="font-mono text-xs uppercase tracking-widest mb-10 text-gray-500">The End (For now)</p>
+            
+            <h2 class="text-[12vw] leading-[0.8] font-bold uppercase hover:text-gray-400 transition-colors cursor-pointer magnetic-area">
+                Let's<br>Create
+            </h2>
+            
+            <a href="mailto:alok.dev@example.com" class="text-xl font-mono border border-white/20 px-8 py-4 mt-12 hover:bg-white hover:text-black transition-all">
+                alokcasm@gmail.com
+            </a>
+
+            <!-- Footer -->
+            <footer class="absolute bottom-10 w-full flex justify-between px-6 md:px-20 text-[10px] uppercase font-mono text-gray-600">
+                <div>Alok Kumar © 2025</div>
+                <div class="hidden md:block">Built with GSAP + Caffeine + Tears</div>
+            </footer>
+        </section>
+
+    </main>
+
+    <!-- LIBS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+
+<script src="/assets/js/app.js" defer></script>
+</body>
+</html>

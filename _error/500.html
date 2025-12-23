@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>505 - Error</title>
+    
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONTS -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050101; /* Slightly reddish black */
+            --text: #ffffff;
+            --accent: #ff3300; /* Fire Orange/Red */
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Clash Display', sans-serif;
+            overflow: hidden;
+            cursor: none;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* CURSOR */
+        #cursor-dot {
+            width: 8px; height: 8px; background: white; border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+            mix-blend-mode: difference;
+        }
+        #cursor-circle {
+            width: 40px; height: 40px; border: 1px solid white; border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
+            mix-blend-mode: difference; transition: width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        body.hover-active #cursor-circle { 
+            width: 80px; height: 80px; 
+            background-color: rgba(255, 51, 0, 0.2); 
+            border-color: var(--accent); 
+        }
+
+        /* NOISE & GRUNGE */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50; opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            animation: noiseMove 0.2s infinite;
+        }
+
+        /* NUCLEAR MELTDOWN PULSE */
+        .meltdown-pulse {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgba(255, 51, 0, 0.15) 0%, transparent 60%);
+            opacity: 0.5;
+            animation: pulse-panic 0.5s infinite alternate;
+            pointer-events: none;
+        }
+
+        /* ANIMATIONS */
+        @keyframes noiseMove { 0% { background-position: 0 0; } 100% { background-position: 10px 10px; } }
+        
+        @keyframes pulse-panic { 
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); } 
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.05); } 
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .shake-constant { animation: shake 2s infinite; }
+        .type-cursor::after { content: '█'; animation: blink 0.8s infinite; color: var(--accent); }
+        @keyframes blink { 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- UI LAYERS -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <div class="noise"></div>
+    <div class="meltdown-pulse"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 h-full w-full flex flex-col items-center justify-center p-6 text-center">
+
+        <!-- ERROR CODE -->
+        <div class="relative group cursor-default">
+            <h1 class="text-[20vw] leading-[0.8] font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-orange-900 select-none shake-constant">
+                505
+            </h1>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+                <p class="font-mono text-xs md:text-sm text-[#ff3300] uppercase tracking-[0.4em] bg-black/70 backdrop-blur-md py-3 border-y border-[#ff3300]/30">
+                    HTTP_Version_Not_Supported
+                </p>
+            </div>
+        </div>
+
+        <!-- THE ROAST BOX -->
+        <div class="mt-12 w-full max-w-2xl min-h-[120px] border-l-2 border-[#ff3300] pl-6 text-left flex flex-col justify-center bg-white/5 p-4 rounded-r-lg">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                <span class="font-mono text-[10px] text-gray-500 uppercase">Server Log:</span>
+            </div>
+            <p id="roast-text" class="text-xl md:text-2xl font-medium leading-tight type-cursor text-gray-200">
+                <!-- JS will inject text here -->
+            </p>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="mt-16 flex flex-col md:flex-row gap-8 items-center">
+            
+            <a href="/" class="group relative px-8 py-4 bg-[#0a0a0a] text-white font-mono text-xs uppercase tracking-widest border border-white/10 overflow-hidden hover:border-[#ff3300]">
+                <span class="relative z-10 group-hover:text-black transition-colors">Evacuate (Home)</span>
+                <div class="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </a>
+
+            <button onclick="nextRoast()" class="text-xs font-mono text-gray-500 uppercase hover:text-[#ff3300] transition-colors underline decoration-gray-700 hover:decoration-[#ff3300] underline-offset-4">
+                What happened?
+            </button>
+            
+        </div>
+
+        <!-- FOOTER MARQUEE -->
+        <div class="fixed bottom-0 left-0 w-full overflow-hidden py-4 border-t border-[#ff3300]/20 bg-black/90 backdrop-blur">
+            <div class="whitespace-nowrap font-mono text-[10px] text-[#ff3300] uppercase tracking-widest animate-marquee">
+                /// CRITICAL ERROR /// SERVER ON FIRE /// ARE YOU USING INTERNET EXPLORER? /// BHAI REFRESH MAT KARNA PHAT JAYEGA ///
+            </div>
+        </div>
+
+    </main>
+
+    <!-- LIBS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        // ------------------------------------------------
+        // 1. THE ROAST DATABASE (505 / Server Error Edition)
+        // ------------------------------------------------
+        const roasts = [
+            "Error 505. Bhai, tera browser itna purana hai ki dinosaur dikh rahe hain. 🦖",
+            "Server ne haath khade kar diye. (Server gave up).",
+            "HTTP Version Not Supported? Are you sending requests via Pigeon?",
+            "Code phat gaya. Developer ro raha hai kone mein. 😭",
+            "System Meltdown. Please pour water on your CPU.",
+            "Bhai konsa internet use kar raha hai? 2G? 💀",
+            "The server refuses to talk to you. You are outdated.",
+            "Boom. Kaboom. Khatam. Tata. Bye Bye.",
+            "Skill Issue: Upgrade your browser or upgrade your life.",
+            "Ye request handle karna hamare aukat ke bahar hai."
+        ];
+
+        // ------------------------------------------------
+        // 2. CURSOR LOGIC
+        // ------------------------------------------------
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorCircle = document.getElementById('cursor-circle');
+        let mouseX = 0, mouseY = 0;
+        let circleX = 0, circleY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0 });
+        });
+
+        gsap.ticker.add(() => {
+            circleX += (mouseX - circleX) * 0.1;
+            circleY += (mouseY - circleY) * 0.1;
+            gsap.set(cursorCircle, { x: circleX - 20, y: circleY - 20 });
+        });
+
+        // Hover Effect
+        const hoverEls = document.querySelectorAll('a, button, h1');
+        hoverEls.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+        });
+
+        // ------------------------------------------------
+        // 3. TYPING EFFECT
+        // ------------------------------------------------
+        const roastEl = document.getElementById('roast-text');
+        let isTyping = false;
+
+        function typeText(text) {
+            if(isTyping) return;
+            isTyping = true;
+            roastEl.innerText = "";
+            let i = 0;
+            
+            const interval = setInterval(() => {
+                roastEl.innerText += text.charAt(i);
+                i++;
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    isTyping = false;
+                }
+            }, 30);
+        }
+
+        function nextRoast() {
+            if(isTyping) return;
+            
+            // Shake animation out
+            gsap.to(roastEl, {
+                x: 5, opacity: 0, duration: 0.05, yoyo: true, repeat: 5,
+                onComplete: () => {
+                    gsap.set(roastEl, { x: 0, opacity: 1 });
+                    const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
+                    typeText(randomRoast);
+                }
+            });
+        }
+
+        // Init Text
+        setTimeout(() => {
+            typeText("Error 505. Server is confused. Are you using a Nokia 3310?");
+        }, 500);
+
+        // ------------------------------------------------
+        // 4. ANIMATIONS
+        // ------------------------------------------------
+        gsap.to(".animate-marquee", {
+            xPercent: -50,
+            repeat: -1,
+            duration: 10, // Faster for panic effect
+            ease: "linear"
+        });
+
+        gsap.from("h1", { scale: 0.8, opacity: 0, duration: 0.5, ease: "bounce.out" });
+        gsap.from(".meltdown-pulse", { opacity: 0, duration: 2 });
+
+        // ------------------------------------------------
+        // 5. F12 TRAP (Server Edition)
+        // ------------------------------------------------
+        
+        // A. Console Spam
+        const styleTitle = "color: #ff3300; font-size: 30px; font-weight: bold; background: #000; padding: 10px;";
+        const styleBody = "color: #fff; background: #222; font-size: 14px; padding: 5px;";
+
+        setTimeout(() => {
+            console.clear();
+            console.log("%c 🔥 SERVER IS BURNING! 🔥", styleTitle);
+            console.log("%c Don't touch anything! You will make it worse. ", styleBody);
+            console.log("%c Error: User_Is_Too_Curious.exe ", "color: yellow; font-family: monospace;");
+        }, 1000);
+
+        // B. Detect F12 and Shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67))) {
+                e.preventDefault();
+                triggerAlert();
+            }
+        });
+
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault();
+            triggerAlert();
+        });
+
+        function triggerAlert() {
+            alert("⚠️ DANGER! ⚠️\n\nServer already aag mein hai.\nInspect karke kyun jale pe namak chidak rahe ho?\n\nBhago yahan se! 🏃‍♂️");
+        }
+
+    </script>
+</body>
+</html>

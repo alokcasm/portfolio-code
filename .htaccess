@@ -1,0 +1,31 @@
+# ===============================
+# BASIC SECURITY
+# ===============================
+Options -Indexes
+DirectoryIndex index.html index.php
+
+RewriteEngine On
+
+# ===============================
+# ALLOW ERROR PAGES INTERNALLY
+# ===============================
+RewriteRule ^_errors/(403|404|500)\.html$ - [L]
+
+# ===============================
+# BLOCK DIRECT ACCESS TO ERROR FILES
+# ===============================
+RewriteRule ^(403|404|500)\.html$ - [F,L]
+
+# ===============================
+# BLOCK ACCESS TO SENSITIVE FILE TYPES
+# ===============================
+<FilesMatch "\.(htaccess|htpasswd|env|log|ini|json|md|txt)$">
+    Require all denied
+</FilesMatch>
+
+# ===============================
+# CUSTOM ERROR PAGES (INTERNAL)
+# ===============================
+ErrorDocument 403 /_errors/403.html
+ErrorDocument 404 /_errors/404.html
+ErrorDocument 500 /_errors/500.html

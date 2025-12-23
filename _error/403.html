@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Forbidden</title>
+    
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONTS -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #030303;
+            --text: #ffffff;
+            --red-dim: rgba(255, 0, 0, 0.15);
+            --accent: #ff0000;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Clash Display', sans-serif;
+            overflow: hidden;
+            cursor: none;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* CURSOR */
+        #cursor-dot {
+            width: 8px; height: 8px; background: white; border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+            mix-blend-mode: difference;
+        }
+        #cursor-circle {
+            width: 40px; height: 40px; border: 1px solid white; border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
+            mix-blend-mode: difference; transition: width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        body.hover-active #cursor-circle { 
+            width: 80px; height: 80px; 
+            background-color: rgba(255, 0, 0, 0.2); 
+            border-color: red; 
+        }
+
+        /* GRAIN OVERLAY */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50; opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            animation: noiseMove 0.2s infinite;
+        }
+
+        /* RED PULSE BG */
+        .danger-pulse {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--red-dim) 0%, transparent 70%);
+            opacity: 0.5;
+            animation: pulse 4s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* ANIMATIONS */
+        @keyframes noiseMove { 0% { background-position: 0 0; } 100% { background-position: 10px 10px; } }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); } }
+        
+        .type-cursor::after { content: '|'; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* GLITCH TEXT */
+        .glitch-hover:hover {
+            animation: glitch 0.3s infinite;
+            color: red;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- UI LAYERS -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <div class="noise"></div>
+    <div class="danger-pulse"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 h-full w-full flex flex-col items-center justify-center p-6 text-center">
+
+        <!-- ERROR CODE -->
+        <div class="relative group cursor-default">
+            <h1 class="text-[20vw] leading-[0.8] font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-900 select-none glitch-hover">
+                403
+            </h1>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+                <p class="font-mono text-xs md:text-sm text-red-500 uppercase tracking-[0.5em] bg-black/60 backdrop-blur-sm py-2 border-y border-red-500/20">
+                    Restricted_Area
+                </p>
+            </div>
+        </div>
+
+        <!-- THE ROAST BOX -->
+        <div class="mt-12 w-full max-w-2xl min-h-[120px] border-l-2 border-red-500 pl-6 text-left flex flex-col justify-center">
+            <span class="font-mono text-[10px] text-gray-500 uppercase mb-2">System Message:</span>
+            <p id="roast-text" class="text-xl md:text-2xl font-medium leading-tight type-cursor text-gray-200">
+                <!-- JS will inject text here -->
+            </p>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="mt-16 flex flex-col md:flex-row gap-8 items-center">
+            
+            <a href="/" class="group relative px-8 py-4 bg-[#0a0a0a] text-white font-mono text-xs uppercase tracking-widest border border-white/10 overflow-hidden">
+                <span class="relative z-10 group-hover:text-black transition-colors">Run Away (Home)</span>
+                <div class="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </a>
+
+            <button onclick="nextRoast()" class="text-xs font-mono text-gray-500 uppercase hover:text-red-500 transition-colors underline decoration-gray-700 hover:decoration-red-500 underline-offset-4">
+                I want more insults
+            </button>
+            
+        </div>
+
+        <!-- FOOTER MARQUEE -->
+        <div class="fixed bottom-0 left-0 w-full overflow-hidden py-4 border-t border-white/5 bg-black/80 backdrop-blur">
+            <div class="whitespace-nowrap font-mono text-[10px] text-red-500/50 uppercase tracking-widest animate-marquee">
+                /// Warning: backchodi detected /// mat kar lala /// tera gf pata lunga bhai /// Don't touch the code ///
+            </div>
+        </div>
+
+    </main>
+
+    <!-- LIBS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        // ------------------------------------------------
+        // 1. THE ROAST DATABASE (Access Denied Edition)
+        // ------------------------------------------------
+        const roasts = [
+            "Access Denied. Bhai, ye assets folder hai, tumhara sasural nahi. 🛑",
+            "Error 403. You are not on the guest list. Get lost.",
+            "Wow, Inspector Gadget. Trying to see the code? Nice try.",
+            "Permission Denied. Just like your crush denied your proposal.",
+            "System32 delete kar dunga agar wapas aaya toh. 😤",
+            "Stop clicking. You are embarrassing yourself.",
+            "This is a restricted area. Go watch reels instead.",
+            "Your IP has been sent to the FBI (Fake Bureau of Investigation).",
+            "Are you lost? Or just bad at following instructions?",
+            "Skill Issue Detected. Please learn how URLs work."
+        ];
+
+        // ------------------------------------------------
+        // 2. CURSOR LOGIC
+        // ------------------------------------------------
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorCircle = document.getElementById('cursor-circle');
+        let mouseX = 0, mouseY = 0;
+        let circleX = 0, circleY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0 });
+        });
+
+        gsap.ticker.add(() => {
+            circleX += (mouseX - circleX) * 0.1;
+            circleY += (mouseY - circleY) * 0.1;
+            gsap.set(cursorCircle, { x: circleX - 20, y: circleY - 20 });
+        });
+
+        // Hover Effect
+        const hoverEls = document.querySelectorAll('a, button, h1');
+        hoverEls.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+        });
+
+        // ------------------------------------------------
+        // 3. TYPING EFFECT
+        // ------------------------------------------------
+        const roastEl = document.getElementById('roast-text');
+        let isTyping = false;
+
+        function typeText(text) {
+            if(isTyping) return;
+            isTyping = true;
+            roastEl.innerText = "";
+            let i = 0;
+            
+            const interval = setInterval(() => {
+                roastEl.innerText += text.charAt(i);
+                i++;
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    isTyping = false;
+                }
+            }, 30);
+        }
+
+        function nextRoast() {
+            if(isTyping) return;
+            
+            // Glitch animation out
+            gsap.to(roastEl, {
+                x: 10, opacity: 0, duration: 0.1, yoyo: true, repeat: 3,
+                onComplete: () => {
+                    gsap.set(roastEl, { x: 0, opacity: 1 });
+                    const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
+                    typeText(randomRoast);
+                }
+            });
+        }
+
+        // Init Text
+        setTimeout(() => {
+            typeText("Error 403. You walked into the wrong neighborhood, buddy.");
+        }, 500);
+
+        // ------------------------------------------------
+        // 4. ANIMATIONS
+        // ------------------------------------------------
+        gsap.to(".animate-marquee", {
+            xPercent: -50,
+            repeat: -1,
+            duration: 20,
+            ease: "linear"
+        });
+
+        gsap.from("h1", { y: 50, opacity: 0, duration: 1.5, ease: "power4.out" });
+        gsap.from(".danger-pulse", { scale: 0, duration: 2, ease: "elastic.out(1, 0.3)" });
+
+        // ------------------------------------------------
+        // 5. F12 TRAP (The "Pop Up" & Console Spam)
+        // ------------------------------------------------
+        
+        // A. Console Spam
+        const styleTitle = "color: red; font-size: 30px; font-weight: bold; text-shadow: 2px 2px 0px black;";
+        const styleBody = "color: white; background: #333; font-size: 14px; padding: 5px;";
+
+        setTimeout(() => {
+            console.clear();
+            console.log("%c 💀 STOP RIGHT THERE! 💀", styleTitle);
+            console.log("%c Ye developer zone hai. Chup chap bahar jao. ", styleBody);
+            console.log("%c Warning: Code churana mana hai. ", "color: yellow; font-size: 12px;");
+        }, 1000);
+
+        // B. Detect F12 and Shortcuts
+        document.addEventListener('keydown', function(e) {
+            // F12 OR Ctrl+Shift+I OR Ctrl+Shift+C OR Ctrl+U
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67)) || (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+                triggerAlert();
+            }
+        });
+
+        // C. Detect Right Click
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault();
+            triggerAlert();
+        });
+
+        function triggerAlert() {
+            alert("⚠️ WARNING! ⚠️\n\nBhai, Inspect Element khol ke kya milega?\nSirf disappointment.\n\nWapas chale jao izzat se. 😎");
+        }
+
+    </script>
+</body>
+</html>
